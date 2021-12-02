@@ -12,6 +12,8 @@ export class BoutiqueService {
 
   url = 'http://localhost/cellier-catalogue.php';
 
+  articles!: Array<Article>; 
+
   constructor(private httpClient: HttpClient) {
   }
 

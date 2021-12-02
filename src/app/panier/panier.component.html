@@ -33,7 +33,7 @@
                       <h5 class="card-title">{{a.nom}}</h5>
                       <h6 class="card-subtitle mb-2 text-muted"> 
                           {{a.prix/100 | number:'1.2-2' }} € </h6>
-                      <a href="#" class="btn" [ngClass]="a.panier < a.quantite ? 'btn-primary': 'btn-secondary'" (click)="ajoute(a.id)"> 
+                      <a class="btn" [ngClass]="a.panier < a.quantite ? 'btn-primary': 'btn-secondary'" (click)="ajoute(a.id)"> 
                           {{a.quantite}} - {{a.panier}} </a>
                     </div>
                   </div>
