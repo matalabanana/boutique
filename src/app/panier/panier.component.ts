@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Article } from '../model/Article.component';
+
+import { NGXLogger } from "ngx-logger";
+
 import { Categorie } from '../model/Categorie.component';
 import { BoutiqueService } from '../service/boutique.service';
 
@@ -12,58 +13,25 @@ import { BoutiqueService } from '../service/boutique.service';
 export class PanierComponent implements OnInit {
 
   articles : Array<any> = []; 
-  categories : Array<Categorie> = []; 
-  vue : number = 0; 
-  cat: number = 0; 
 
-  constructor(private mystore: BoutiqueService) { }
+  constructor(private mystore: BoutiqueService, private logger: NGXLogger) { 
+    // this.logger.error("Your log message goes here");
+  }
 
   ngOnInit(): void 
   {
-   
-    //type Observable donc async 
-    var obs = this.mystore.getStore(); 
-   
-    obs.subscribe(
-      ( value ) => { 
-        
-        this.articles = value['articles']        
-        this.categories = value['categories']
-        this.articles.forEach(function(a) {
-          a.panier = 0
-        })
-        console.log('chargement local store')
-      }, 
-      ( error ) => { console.log('erreur : '+error); }, 
-      ()        => { console.log('Observable fini !'); }
-    ); 
-     
+    var x = this.mystore.getArticles();    
+    x.forEach((a) => {
+      if (a.panier > 0) {
+        this.articles.push(a); 
+      }
+    })
   }
+
 
   ajoute(id: number, inc: number = 1) 
   {
-    this.articles.forEach(function(a) {
-      if (a.id==id) {
-        console.log("ajoute "+id); 
-        a.panier += inc; 
-        a.panier = Math.max(0, a.panier); 
-        a.panier = Math.min(a.quantite, a.panier); 
-      }
-    }) 
+    this.mystore.ajoute(id, inc); 
   }
 
-  montantPanier(): number 
-  {
-    var x = 0; 
-    this.articles.forEach(function(a) {
-      x += a.prix * a.panier; 
-    })
-    return x; 
-  }
-
-  page(x: number, categorie: number)
-  {
-    this.vue = x; 
-    this.cat = categorie; 
-  }
 }

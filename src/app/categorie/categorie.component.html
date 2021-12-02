@@ -1,1 +1,25 @@
 <p>categorie {{id}} works!</p>
+
+
+
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let a of articles">
+            <div class="col-lg-2 col-sm-4 text-center">
+                <div class="card card-article">
+                    <img src="{{a.illustration}}" class="card-img-top" alt="{{a.nom}}" style="max-height:100px;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{a.nom}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted"> 
+                          {{a.prix/100 | number:'1.2-2' }} € </h6>
+                      <a class="btn" [ngClass]="a.panier < a.quantite ? 'btn-primary': 'btn-secondary'" (click)="ajoute(a.id)"> 
+                          {{a.quantite}} - {{a.panier}} </a>
+                    </div>
+                  </div>
+
+
+            </div>
+        </ng-container>
+    </div>
+</div>
+

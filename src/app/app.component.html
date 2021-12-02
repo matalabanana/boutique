@@ -1,12 +1,27 @@
 
-<h1>Ma Boutique</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/panier" routerLinkActive="active">Panier</a></li>
-    <li><a routerLink="/categorie/1" routerLinkActive="active">Vin</a></li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngFor="let c of categories">
+            <a class="nav-link" [routerLink]="['/categorie', c.id]">{{c.nom}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/panier">
+            Panier {{montantPanier()/100 | number:'1.2-2'}}
+        </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
-<hr> 
+
+
+<button class="btn btn-success" (click)="getStore()" *ngIf="!isOpen">
+  Ouvrir le magasin !
+</button>
+
+
 
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>
