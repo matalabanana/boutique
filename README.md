@@ -1,11 +1,15 @@
 # Logiciel de caisse 
 
+Création d'un logiciel de caisse pour 
+* faire les factures
+* mettre à jour le stock 
 
-# Stockage des données
+
+## Stockage des données
 
 Afin de faciliter la communication entre les composants et que les données persistent à la navigation, il faut stocker les données dans le service. 
 
-# Passer en prod
+## Passer en prod
 
 ```
 ng build --base-href=/boutique1/ --prod
