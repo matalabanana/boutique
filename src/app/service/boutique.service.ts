@@ -22,7 +22,7 @@ export class BoutiqueService {
 
   public getStore(): Observable<Store> {
     console.log("chargement du catalogue...");
-    return this.httpClient.get<Store>('http://localhost/cellier/public/store.php');
+    return this.httpClient.get<Store>('http://boutique.stolvezen.com/api/store.php');
   }
 
 
@@ -41,7 +41,7 @@ export class BoutiqueService {
     };
     
     
-    this.httpClient.post('http://localhost/cellier/public/payer.php', 
+    this.httpClient.post('http://boutique.stolvezen.com/api/payer.php', 
       { title: 'Paiement de type '+type }, httpOptions)
       .subscribe(data => {
       console.log('ok');

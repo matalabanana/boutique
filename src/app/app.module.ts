@@ -19,7 +19,7 @@ import { CategorieComponent } from './categorie/categorie.component';
     AppRoutingModule, 
     HttpClientModule,
     LoggerModule.forRoot({
-      serverLoggingUrl: 'http://localhost/cellier/public/logger.php',
+      serverLoggingUrl: 'http://boutique.stolvezen.com/api/logger.php',
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.INFO 
     }) 
