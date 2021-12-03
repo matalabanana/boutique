@@ -1,25 +1,35 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <a class="navbar-brand" href="/"> <i class="fa fa-home"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBoutique" aria-controls="navBoutique" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+  
+    <div class="collapse navbar-collapse" id="navBoutique">
       <ul class="navbar-nav">
         <li class="nav-item" *ngFor="let c of categories">
-            <a class="nav-link" [routerLink]="['/categorie', c.id]">{{c.nom}}</a>
+            <a class="nav-link" [routerLink]="['/categorie', c.id]"
+            routerLinkActive="active">{{c.nom}}</a>
         </li>
+      </ul>
+
+
+
+      <!-- right navbar with ms-auto --> 
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/panier">
-            Panier {{montantPanier()/100 | number:'1.2-2'}}
+            Panier {{montantPanier()/100 | number:'1.2-2'}} € 
         </a>
         </li>
       </ul>
+
     </div>
   </div>
 </nav>
-
-
-<button class="btn btn-success" (click)="getStore()" *ngIf="!isOpen">
-  Ouvrir le magasin !
-</button>
 
 
 

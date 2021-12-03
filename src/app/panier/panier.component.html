@@ -1,11 +1,41 @@
 
 
 
+<table class="table">
+    <thead>
+    <tr class="table-primary">
+        <th>Article</th>
+        <th class="text-end">Quantité</th>
+        <th class="text-end">P.U.</th>
+        <th class="text-end">Prix</th>
+    </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let a of articles">
+        <tr (click)="ajoute(a.id,-1)" [ngClass]="{'text-secondary': a.panier==0}">
+        <td> {{a.nom}} </td>
+        <td class="text-end"> {{a.panier}} </td> 
+        <td class="text-end"> {{a.prix / 100| number:'1.2-2'}}</td>
+        <td class="text-end"> {{a.prix * a.panier / 100 | number:'1.2-2'}} </td>
+        </tr>
+        </ng-container>
+    <tr class="table-primary">
+        <td colspan="1" class="table-primary text-end">  </td>
+        <td colspan="3" class="text-end display-5">{{montantPanier()/100 | number:'1.2-2' }}</td>
+    </tr>
+</tbody>
+</table>
+
 <div class="container">
-<div class="col-lg-4" *ngFor="let a of articles">
-    {{a.id}}. <a (click)="ajoute(a.id,-1)"> {{a.nom}} ({{a.panier}}) </a>
+<div class="row">
+    <div class="col text-center">
+        <button class="btn btn-primary" (click)="payer(1)"> CB </button>
+    </div>
+    <div class="col text-center">
+        <button class="btn btn-primary" (click)="payer(2)"> Chèque </button>
+    </div>
+    <div class="col text-center">
+        <button class="btn btn-primary" (click)="payer(3)"> Espèces </button>
+    </div>
 </div>
 </div>
-
-    
-

@@ -1,19 +1,19 @@
 export class Article {
     public id: number; 
-    public categorie: number; 
+    public categorie_id: number; 
     public nom: string;
     public prix: number;
-    public quantite: number;
+    public stock: number;
     public panier: number; 
     public illustration: string; 
 
-    public constructor(id: number, categorie:number, nom: string, prix: number, quantite: number, panier:number, illustration: string) 
+    public constructor(id: number, categorie_id:number, nom: string, prix: number, stock: number, panier:number, illustration: string) 
     {
         this.id = id; 
-        this.categorie = categorie; 
+        this.categorie_id = categorie_id; 
         this.nom = nom;
         this.prix = prix;
-        this.quantite = quantite;
+        this.stock = stock;
         this.panier = panier; 
         this.illustration = illustration; 
     }

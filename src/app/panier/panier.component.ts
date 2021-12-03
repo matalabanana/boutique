@@ -14,9 +14,7 @@ export class PanierComponent implements OnInit {
 
   articles : Array<any> = []; 
 
-  constructor(private mystore: BoutiqueService, private logger: NGXLogger) { 
-    // this.logger.error("Your log message goes here");
-  }
+  constructor(private mystore: BoutiqueService, private logger: NGXLogger) { }
 
   ngOnInit(): void 
   {
@@ -32,6 +30,17 @@ export class PanierComponent implements OnInit {
   ajoute(id: number, inc: number = 1) 
   {
     this.mystore.ajoute(id, inc); 
+    this.logger.info("ajoute "+id+" au panier avec inc="+inc);
+  }
+
+  montantPanier() 
+  {
+    return this.mystore.montantPanier()
+  }
+
+  payer(type: number) 
+  {
+    this.mystore.payer(type); 
   }
 
 }

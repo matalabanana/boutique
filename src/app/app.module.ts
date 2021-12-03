@@ -19,9 +19,9 @@ import { CategorieComponent } from './categorie/categorie.component';
     AppRoutingModule, 
     HttpClientModule,
     LoggerModule.forRoot({
-      serverLoggingUrl: '/api/logs',
+      serverLoggingUrl: 'http://localhost/cellier/public/logger.php',
       level: NgxLoggerLevel.DEBUG,
-      serverLogLevel: NgxLoggerLevel.ERROR
+      serverLogLevel: NgxLoggerLevel.INFO 
     }) 
   ],
   providers: [],

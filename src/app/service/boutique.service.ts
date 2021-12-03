@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import { Article } from '../model/Article.component';
@@ -11,9 +11,6 @@ import { Store } from '../model/Store.component';
 })
 export class BoutiqueService {
 
-  url = 'http://localhost/cellier-catalogue.php';
-
-
   articles: Array<Article> = []; 
   categories: Array<Categorie> = []; 
 
@@ -21,10 +18,46 @@ export class BoutiqueService {
   }
 
   
+
+
   public getStore(): Observable<Store> {
     console.log("chargement du catalogue...");
-    return this.httpClient.get<Store>(this.url);
+    return this.httpClient.get<Store>('http://localhost/cellier/public/store.php');
   }
+
+
+
+
+  payer(type: number) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json', 
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',    
+      'Access-Control-Allow-Headers': 'Content-Type', 
+      'Access-Control-Request-Headers': 'X-Requested-With, accept, content-type'
+    
+    })
+    };
+    
+    
+    this.httpClient.post('http://localhost/cellier/public/payer.php', 
+      { title: 'Paiement de type '+type }, httpOptions)
+      .subscribe(data => {
+      console.log('ok');
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -33,10 +66,14 @@ export class BoutiqueService {
   {
     return this.articles; 
   }
+
   public setArticles(articles: Array<Article>) {
     this.articles = articles; 
     this.articles.forEach(function(a) {
       a.panier = 0
+
+      // pour dev, evite de remplir le panier 
+      if (a.id < 5) { a.panier = a.id }
     })
     console.log('chargement local store')
   }
@@ -57,7 +94,7 @@ export class BoutiqueService {
         console.log("ajoute "+id); 
         a.panier += inc; 
         a.panier = Math.max(0, a.panier); 
-        a.panier = Math.min(a.quantite, a.panier); 
+        a.panier = Math.min(a.stock, a.panier); 
       }
     }) 
   }
